@@ -8,12 +8,12 @@ export type IconProps = {
 export const calcIconSize = (size: Size) => {
   switch (size) {
     case "small":
-      return 24;
+      return "scale(0.5)";
     case "medium":
-      return 36;
+      return "scale(0.75)";
     case "large":
-      return 48;
+      return "scale(1)";
     default:
-      return 24;
+      return "scale(1)";
   }
 };
