@@ -1,22 +1,42 @@
-import type { NextPage } from "next";
+import type { NextPage, GetServerSidePropsResult } from "next";
 import Layout from "@/components/Layout";
+import { Todo } from "../interfaces/todos";
+import TodoList from "@/components/todos/TodoList";
+import TodoForm from "@/components/todos/TodoForm";
+
+type PageProps = {
+  todos: Todo[];
+};
+
+export async function getServerSideProps(): Promise<
+  GetServerSidePropsResult<PageProps>
+> {
+  const response = await fetch("https://jsonplaceholder.typicode.com/todos", {
+    method: "GET"
+  });
+  const todos = await response.json();
+
+  return {
+    props: { todos: todos.slice(0, 5) }
+  };
+}
 
 const navLinks = [
   { path: "/", name: "home" },
   { path: "/todos", name: "todos" }
 ];
 
-const Home: NextPage = () => {
+const Home: NextPage<PageProps> = ({ todos }) => {
   return (
     <Layout links={navLinks}>
       <h1 className="text-3xl font-bold underline mb-4">Todo List</h1>
       <p>built with next.js & tailwind</p>
-      <p>
-        View the list of{" "}
-        <a href="/todos" className="text-fuchsia-700">
-          Todos
-        </a>
-      </p>
+      <TodoForm />
+      <TodoList
+        todos={todos}
+        deleteTodo={() => console.log("delete todo")}
+        completeTodo={() => console.log("complete todo")}
+      />
     </Layout>
   );
 };
