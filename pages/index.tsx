@@ -1,8 +1,8 @@
 import type { NextPage, GetServerSidePropsResult } from "next";
-import Layout from "@/components/Layout";
+import Layout from "@/components/layout/base-layout";
 import { Todo } from "../interfaces/todos";
-import TodoList from "@/components/todos/TodoList";
-import TodoForm from "@/components/todos/TodoForm";
+import TodoList from "@/components/todos/todo-list";
+import TodoForm from "@/components/todos/todo-form";
 
 type PageProps = {
   todos: Todo[];

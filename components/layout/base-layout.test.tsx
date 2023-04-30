@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { render, screen } from "@testing-library/react";
-import Layout from "@/components/Layout";
+import Layout from "@/components/layout/base-layout";
 
 const navLinks = [
   { path: "/", name: "home" },
