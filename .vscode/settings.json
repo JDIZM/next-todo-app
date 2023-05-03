@@ -1,7 +1,9 @@
 {
   // theme
-  "workbench.colorTheme": "Field Lights",
+  // "workbench.colorTheme": "Field Lights",
+  "workbench.colorTheme": "Darcula",
   "workbench.iconTheme": "material-icon-theme",
+  "editor.fontFamily": "JetBrains Mono",
   // code syle and formatting
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
