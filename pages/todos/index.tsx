@@ -64,7 +64,6 @@ const TodoPage: NextPage = () => {
   return (
     <Layout links={navLinks}>
       <h1 className="text-3xl font-bold underline mb-4">My Todo&apos;s</h1>
-      <p>built with next.js & tailwind</p>
       {isLoading && <p>Loading...</p>}
       {error && <p>There was an error. Please try refreshing.</p>}
       {data && data.length > 0 && (

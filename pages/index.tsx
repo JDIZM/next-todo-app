@@ -1,8 +1,8 @@
 import type { NextPage, GetServerSidePropsResult } from "next";
 import Layout from "@/components/layout/base-layout";
 import { Todo } from "../interfaces/todos";
-import { TodoForm, TodoList } from "@/components/todos/";
-import { useState, FormEvent } from "react";
+import { TodoList } from "@/components/todos/";
+import Link from "next/link";
 
 type PageProps = {
   todos: Todo[];
@@ -27,11 +27,22 @@ export const navLinks = [
   { path: "/todos", name: "todos" }
 ];
 
+// example using server rendered data.
+// but we can't update the data on the server.
+// so using a client side rendered list of todos is better for this demo.
 const Home: NextPage<PageProps> = ({ todos }) => {
   return (
     <Layout links={navLinks}>
       <h1 className="text-3xl font-bold underline mb-4">Todo List</h1>
-      <p>built with next.js & tailwind</p>
+      <p>
+        This page is rendered server side. The data is fetched from the
+        jsonplaceholder api.
+      </p>
+      <p>
+        View a list of todos rendered client side on{" "}
+        <Link href="/todos">/todos</Link>
+      </p>
+
       <TodoList
         todos={todos}
         deleteTodo={() => console.log("delete todo")}
