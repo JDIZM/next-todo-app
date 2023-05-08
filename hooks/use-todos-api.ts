@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 export const useTodosApi = (id?: number) => {
   const [data, setData] = useState<Todo[]>([] as Todo[]);
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState<null | Error>(null);
 
   const fetchData = async (url: string) => {
@@ -29,5 +29,5 @@ export const useTodosApi = (id?: number) => {
     fetchData(url);
   }, [id]);
 
-  return { data, loading, error };
+  return { data, isLoading, error };
 };

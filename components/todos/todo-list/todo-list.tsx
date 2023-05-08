@@ -10,22 +10,22 @@ interface TodoListProps {
 
 const TodoList = ({ todos, deleteTodo, completeTodo }: TodoListProps) => (
   <ul className="p-2">
-    {todos.map((todo) => (
-      <li key={todo.id} className="p-4 mb-4 bg-white rounded text-black">
+    {todos.map(({ id, title, completed }) => (
+      <li key={id} className="p-4 mb-4 bg-white rounded text-black">
         <div className="flex justify-between items-center">
           <p>
-            {todo.id} - {todo.title}
+            {id} - {title}
           </p>
           <div>
             <button
               className="bg-white hover:bg-white font-bold py-2 px-2 rounded"
-              onClick={() => completeTodo(todo.id)}
+              onClick={() => completeTodo(id)}
             >
               <DoneIcon size="small" style={{ color: "green" }} />
             </button>
             <button
               className="bg-white hover:bg-white font-bold py-2 px-2 rounded ml-2"
-              onClick={() => deleteTodo(todo.id)}
+              onClick={() => deleteTodo(id)}
             >
               <DeleteIcon size="small" style={{ color: "red" }} />
             </button>
