@@ -1,4 +1,4 @@
-import { Todo } from "@/interfaces/todos";
+import { Todo } from "@/types/todos";
 import { useEffect, useState } from "react";
 
 export const useTodosApi = (id?: number) => {

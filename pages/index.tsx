@@ -1,6 +1,6 @@
 import type { NextPage, GetServerSidePropsResult } from "next";
 import Layout from "@/components/layout/base-layout";
-import { Todo } from "../interfaces/todos";
+import { Todo } from "../types/todos";
 import { TodoList } from "@/components/todos/";
 import Link from "next/link";
 

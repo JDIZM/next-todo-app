@@ -1,4 +1,4 @@
-import { Todo } from "@/interfaces/todos";
+import { Todo } from "@/types/todos";
 import DoneIcon from "@/components/icons/done-icon";
 import DeleteIcon from "@/components/icons/delete-icon";
 
