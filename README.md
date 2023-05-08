@@ -1,5 +1,32 @@
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
+## Intro
+
+A todo app built with Next.js, TypeScript, Storybook.
+
+This project uses [Volta](https://volta.sh/) to manage Node.js and Yarn versions.
+
+You can install volta with:
+
+```
+curl https://get.volta.sh | bash
+```
+
+### Built with
+
+- React Testing Library
+- Vitest
+- Circle CI
+- Vercel
+
+### A list of features
+
+- [ ] fetch todos from jsonplaceholder api
+- [ ] display a list of todo items
+- [ ] add, remove, edit, update todo items
+- [ ] filter todos
+- [ ] save updated data to local storage
+
 ## Getting Started
 
 First, run the development server:
