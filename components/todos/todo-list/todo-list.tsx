@@ -1,6 +1,6 @@
-import { Todo } from "../../interfaces/todos";
-import DoneIcon from "@/components/icons/DoneIcon";
-import DeleteIcon from "@/components/icons/DeleteIcon";
+import { Todo } from "@/interfaces/todos";
+import DoneIcon from "@/components/icons/done-icon";
+import DeleteIcon from "@/components/icons/delete-icon";
 
 interface TodoListProps {
   todos: Todo[];
