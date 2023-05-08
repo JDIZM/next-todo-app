@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, FormEvent } from "react";
 
 type TodoFormProps = {
   addTodo: (value: string) => void;
@@ -6,9 +6,10 @@ type TodoFormProps = {
 
 const TodoForm = ({ addTodo }: TodoFormProps) => {
   const [value, setValue] = useState("");
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!value.length) return;
+    addTodo(value);
     setValue("");
   };
   return (
@@ -22,7 +23,6 @@ const TodoForm = ({ addTodo }: TodoFormProps) => {
       <button
         type="submit"
         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-2"
-        onClick={() => addTodo(value)}
       >
         Add Todo
       </button>
