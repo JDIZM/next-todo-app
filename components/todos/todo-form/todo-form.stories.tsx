@@ -5,7 +5,7 @@ import TodoForm from "./todo-form";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: "TodoForm",
+  title: "Todos/TodoForm",
   component: TodoForm
 } as ComponentMeta<typeof TodoForm>;
 
