@@ -21,7 +21,10 @@ const TodoList = ({ todos, deleteTodo, completeTodo }: TodoListProps) => (
               className="bg-white hover:bg-white font-bold py-2 px-2 rounded"
               onClick={() => completeTodo(id)}
             >
-              <DoneIcon size="small" style={{ color: "green" }} />
+              <DoneIcon
+                size="small"
+                style={{ color: completed ? "green" : "grey" }}
+              />
             </button>
             <button
               className="bg-white hover:bg-white font-bold py-2 px-2 rounded ml-2"
@@ -35,4 +38,5 @@ const TodoList = ({ todos, deleteTodo, completeTodo }: TodoListProps) => (
     ))}
   </ul>
 );
+
 export default TodoList;
