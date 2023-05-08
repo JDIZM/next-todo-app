@@ -6,8 +6,19 @@ import { useTodosApi } from "@/hooks/use-todos-api";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { Todo } from "@/interfaces/todos";
 
+const sortTodos = (todos: Todo[]) => {
+  return todos.sort((a, b) => {
+    if (a.id > b.id) {
+      return 1;
+    }
+    if (b.id > a.id) {
+      return -1;
+    }
+    return 0;
+  });
+};
+
 const removeTodo = (id: number, setTodos: Dispatch<SetStateAction<Todo[]>>) => {
-  console.log("remove todo", id);
   setTodos((prev) => prev.filter((todo) => todo.id !== id));
 };
 
@@ -15,11 +26,23 @@ const completeTodo = (
   id: number,
   setTodos: Dispatch<SetStateAction<Todo[]>>
 ) => {
-  console.log("complete todo", id);
+  const completeTodos = (todos: Todo[]) => {
+    const result = todos.map((todo) => {
+      if (todo.id === id) {
+        return {
+          ...todo,
+          completed: !todo.completed
+        };
+      }
+      return todo;
+    });
+    return sortTodos(result);
+  };
+
+  setTodos((prev) => completeTodos(prev));
 };
 
 const addTodo = (value: string, setTodos: Dispatch<SetStateAction<Todo[]>>) => {
-  console.log("add todo", value);
   setTodos((prev) => [
     ...prev,
     {
@@ -36,7 +59,6 @@ const TodoPage: NextPage = () => {
 
   useEffect(() => {
     setTodos(data.slice(0, 10));
-    console.log("data changed", data);
   }, [data]);
 
   return (
