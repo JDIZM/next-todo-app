@@ -33,9 +33,7 @@ const Layout = ({ children, title = defaultTitle, links = [] }: Props) => {
             links.map(({ path, name }, i) => {
               return (
                 <React.Fragment key={path}>
-                  <Link href={path}>
-                    <a>{name}</a>
-                  </Link>
+                  <Link href={path}>{name}</Link>
                   {separator(i) ? " | " : ""}
                 </React.Fragment>
               );
