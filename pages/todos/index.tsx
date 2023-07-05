@@ -2,9 +2,9 @@ import Layout from "@/components/layout/base-layout";
 import { NextPage } from "next";
 import { navLinks } from "..";
 import { TodoForm, TodoList } from "@/components/todos";
-import { useTodosApi } from "@/hooks/use-todos-api";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { Todo } from "@/types/todos";
+import { useTodosApi } from "@/hooks/use-todos-api";
 
 const sortTodos = (todos: Todo[]) => {
   return todos.sort((a, b) => {

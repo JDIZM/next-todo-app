@@ -1,33 +1,34 @@
 import { Todo } from "@/types/todos";
 import { useEffect, useState } from "react";
 
-export const useTodosApi = (id?: number) => {
+// https://nextjs.org/docs/pages/building-your-application/data-fetching/client-side
+export const useTodosApi = (fetchAll = true, id?: number) => {
   const [data, setData] = useState<Todo[]>([] as Todo[]);
   const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState<null | Error>(null);
 
   const fetchData = async (url: string) => {
-    // set loading causes a state change, which causes a re-render #1
-    setLoading(true);
     try {
+      setLoading(true);
       const response = await fetch(url);
       const data = await response.json();
-      setData(data);
-      // set data causes a state change, which causes a re-render #2
+      setData(!data.length ? [data] : data);
     } catch (error) {
       setError(error as Error);
     } finally {
+      setError(null);
       setLoading(false);
     }
   };
 
   useEffect(() => {
-    const url = id
-      ? `https://jsonplaceholder.typicode.com/todos/${id}`
-      : `https://jsonplaceholder.typicode.com/todos`;
-
+    console.log("useTodosApi", { fetchAll, id });
+    if (!fetchAll && !id) return;
+    const url = `https://jsonplaceholder.typicode.com/todos${
+      id ? `/${id}` : ""
+    }`;
     fetchData(url);
-  }, [id]);
+  }, [id, fetchAll]);
 
   return { data, isLoading, error };
 };
