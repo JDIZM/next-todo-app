@@ -57,9 +57,9 @@ const TodoPage: NextPage = () => {
   const { data, isLoading, error } = useTodosApi();
   const [todos, setTodos] = useState(data);
 
-  useEffect(() => {
-    setTodos(data.slice(0, 10));
-  }, [data]);
+  if (todos !== data && data.length > 0) {
+    setTodos(data);
+  }
 
   return (
     <Layout links={navLinks}>
