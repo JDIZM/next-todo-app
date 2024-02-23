@@ -1,4 +1,3 @@
-"use client";
 import Layout from "@/components/layout/base-layout";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
@@ -8,7 +7,7 @@ import { useTodosApi } from "@/hooks/use-todos-api";
 const TodoItemPage: NextPage = () => {
   const router = useRouter();
   const { id } = router.query;
-  const { data, isLoading, error } = useTodosApi(false, Number(id));
+  const { data, isLoading, error } = useTodosApi(Number(id));
 
   const [todo] = data;
 
