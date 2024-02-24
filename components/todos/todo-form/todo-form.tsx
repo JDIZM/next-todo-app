@@ -6,12 +6,14 @@ type TodoFormProps = {
 
 const TodoForm = ({ addTodo }: TodoFormProps) => {
   const [value, setValue] = useState("");
+
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!value.length) return;
     addTodo(value);
     setValue("");
   };
+
   return (
     <form onSubmit={handleSubmit}>
       <input

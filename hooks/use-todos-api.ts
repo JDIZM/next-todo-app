@@ -13,7 +13,7 @@ export const useTodosApi = (id?: number) => {
       setLoading(true);
 
       const response = await fetch(url);
-      const data = await response.json();
+      const { data } = await response.json();
 
       setData(!data.length ? [data] : data.slice(0, 10));
     } catch (error) {
@@ -26,9 +26,7 @@ export const useTodosApi = (id?: number) => {
   };
 
   useEffect(() => {
-    const url = `https://jsonplaceholder.typicode.com/todos${
-      id ? `/${id}` : ""
-    }`;
+    const url = `${process.env.NEXT_PUBLIC_API_URL}/todo${id ? `/${id}` : ""}`;
 
     fetchData(url);
   }, [id]);
