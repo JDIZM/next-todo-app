@@ -88,7 +88,7 @@ const TodoPage: NextPage = () => {
 
   useEffect(() => {
     // when todos change, save to local storage
-    saveLocalData(todos, set);
+    if (todos.length > 0) saveLocalData(todos, set);
   }, [todos, set]);
 
   return (
