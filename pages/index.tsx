@@ -3,6 +3,7 @@ import Layout from "@/components/layout/base-layout";
 import { Todo } from "../types/todos";
 import { TodoList } from "@/components/todos/";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 type PageProps = {
   todos: Todo[];
@@ -16,9 +17,9 @@ export async function getServerSideProps(): Promise<
     method: "GET"
   });
   const todos = await response.json();
-
+  const randomTodosToDisplay = parseFloat((Math.random() * 10).toFixed(0));
   return {
-    props: { todos: todos.slice(0, 5) }
+    props: { todos: todos.slice(0, randomTodosToDisplay) }
   };
 }
 
@@ -31,22 +32,33 @@ export const navLinks = [
 // but we can't update the data on the server.
 // so using a client side rendered list of todos is better for this demo.
 const Home: NextPage<PageProps> = ({ todos }) => {
+  const router = useRouter();
+
+  // Example function to refresh the data on page load.
+  const refreshData = () => {
+    router.replace(router.asPath);
+  };
+
   return (
     <Layout links={navLinks}>
       <h1 className="text-3xl font-bold underline mb-4">Todo List</h1>
+      <p>This page is rendered server side.</p>
+      <p>The data is fetched from the jsonplaceholder api and is immutable.</p>
       <p>
-        This page is rendered server side. The data is fetched from the
-        jsonplaceholder api.
-      </p>
-      <p>
-        View a list of todos rendered client side on{" "}
+        View a list of mutable todos rendered client side on{" "}
         <Link href="/todos">/todos</Link>
       </p>
 
       <TodoList
         todos={todos}
-        deleteTodo={() => console.log("delete todo")}
-        completeTodo={() => console.log("complete todo")}
+        deleteTodo={() => {
+          console.log("delete todo");
+          refreshData();
+        }}
+        completeTodo={() => {
+          console.log("complete todo");
+          refreshData();
+        }}
       />
     </Layout>
   );
