@@ -14,18 +14,29 @@ curl https://get.volta.sh | bash
 
 ### Built with
 
-- React Testing Library
-- Vitest
-- Circle CI
-- Vercel
+- [Next.js](https://nextjs.org/)
+- [Vercel](https://vercel.com/)
+- [Storybook](https://storybook.js.org/)
+- [Vitest](https://vitest.dev/)
+- [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [TypeScript](https://www.typescriptlang.org/)
+
+Note: using a mixture of CSS modules and Tailwind CSS for styling just for example purposes.
 
 ### A list of features
 
-- [ ] fetch todos from jsonplaceholder api
-- [ ] display a list of todo items
-- [ ] add, remove, edit, update todo items
+- [x] local api routes
+- [x] fetch todos from local api using [client side data fetching](https://nextjs.org/docs/pages/building-your-application/data-fetching/client-side) with `React hooks` and `fetch`.
+- [x] fetch todos from jsonplaceholder api using [getServerSideProps](https://nextjs.org/docs/pages/building-your-application/data-fetching/get-server-side-props)
+- [x] display a list of todo items
+- [x] add todo items
+- [x] remove todo items
+- [ ] edit todo items
+- [x] mark todos as complete
 - [ ] filter todos
-- [ ] save updated data to local storage
+- [x] save updated data to local storage;
+- [x] load updated data from local storage if available
 
 ## Getting Started
 
