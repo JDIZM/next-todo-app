@@ -5,6 +5,12 @@ import { TodoForm, TodoList } from "@/components/todos";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { Todo } from "@/types/todos";
 import { useTodosApi } from "@/hooks/use-todos-api";
+import { useLocalStorage } from "@/hooks/use-local-storage";
+
+const saveLocalData = (
+  data: Todo[],
+  set: (key: string, value: Todo[]) => void
+) => set("next-todos", data);
 
 const sortTodos = (todos: Todo[]) => {
   return todos.sort((a, b) => {
@@ -42,11 +48,21 @@ const completeTodo = (
   setTodos((prev) => completeTodos(prev));
 };
 
-const addTodo = (value: string, setTodos: Dispatch<SetStateAction<Todo[]>>) => {
+const addTodo = (
+  value: string,
+  todos: Todo[],
+  setTodos: Dispatch<SetStateAction<Todo[]>>
+) => {
+  const isTodoIdInUse = (todos: Todo[], id: number) => {
+    return todos.some((todo) => todo.id === id);
+  };
+
   setTodos((prev) => [
     ...prev,
     {
-      id: prev.length + 1,
+      id: isTodoIdInUse(todos, prev.length + 1)
+        ? Math.random() * 10
+        : prev.length + 1,
       title: value,
       completed: false
     }
@@ -55,12 +71,25 @@ const addTodo = (value: string, setTodos: Dispatch<SetStateAction<Todo[]>>) => {
 
 const TodoPage: NextPage = () => {
   const { data, isLoading, error } = useTodosApi();
+  const { get, set } = useLocalStorage<Todo[]>();
   const [todos, setTodos] = useState(data);
 
-  // I know right?. Set initial state to 10 todos from the API.
+  const localData = get("next-todos");
+
+  if (localData && localData.length > 0 && !todos.length) {
+    // Set initial data from local storage.
+    setTodos(localData);
+  }
+
+  if (!isLoading && !todos.length && data.length > 0 && !localData) {
+    // Set initial data from API.
+    setTodos(data);
+  }
+
   useEffect(() => {
-    setTodos(data.slice(0, 10));
-  }, [data]);
+    // when todos change, save to local storage
+    saveLocalData(todos, set);
+  }, [todos, set]);
 
   return (
     <Layout links={navLinks}>
@@ -69,7 +98,7 @@ const TodoPage: NextPage = () => {
       {error && <p>There was an error. Please try refreshing.</p>}
       {data && data.length > 0 && (
         <>
-          <TodoForm addTodo={(value) => addTodo(value, setTodos)} />
+          <TodoForm addTodo={(value) => addTodo(value, todos, setTodos)} />
           <TodoList
             todos={todos}
             deleteTodo={(id) => removeTodo(id, setTodos)}
