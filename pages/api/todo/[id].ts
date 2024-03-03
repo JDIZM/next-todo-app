@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { todos } from "@/data/todos.json";
+import data from "@/data/todos.json";
 import { Todo } from "@/types/todos";
 
 type ResponseData = {
@@ -21,7 +21,7 @@ export default async function handler(
     });
   }
 
-  const todo = todos.find((todo) => todo.id === parseFloat(id));
+  const todo = data.todos.find((todo) => todo.id === parseFloat(id));
 
   res.status(200).json({
     data: todo,

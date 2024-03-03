@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import type { Todo } from "@/types/todos";
-import { todos } from "@/data/todos.json";
+import data from "@/data/todos.json";
 
 type ResponseData = {
   data: Todo[];
@@ -12,7 +12,7 @@ export default async function handler(
   res: NextApiResponse<ResponseData>
 ) {
   res.status(200).json({
-    data: todos,
+    data: data.todos,
     success: true
   });
 }
