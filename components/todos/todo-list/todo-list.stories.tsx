@@ -2,7 +2,7 @@ import React from "react";
 import { ComponentStory, ComponentMeta } from "@storybook/react";
 
 import TodoList from "./todo-list";
-import { todos } from "@/data/example-todos.json";
+import { todos } from "@/data/todos.json";
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -22,6 +22,3 @@ Primary.args = {
   deleteTodo: () => console.log("delete todo"),
   completeTodo: () => console.log("complete todo")
 };
-
-// TODO add more stories
-// export const

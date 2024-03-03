@@ -1,7 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+import { todos } from "@/data/todos.json";
+import { Todo } from "@/types/todos";
 
 type ResponseData = {
-  id: string;
+  data?: Todo;
+  success: boolean;
+  message?: string;
 };
 
 export default async function handler(
@@ -12,11 +16,15 @@ export default async function handler(
 
   if (!id) {
     res.status(400).json({
-      id: "id is required"
+      message: "id is required",
+      success: false
     });
   }
 
+  const todo = todos.find((todo) => todo.id === parseFloat(id));
+
   res.status(200).json({
-    id
+    data: todo,
+    success: true
   });
 }
