@@ -14,7 +14,7 @@ type Props = {
   links?: NavLink[];
 };
 
-const defaultTitle = "Next, Prisma and Tailwind";
+const defaultTitle = "Next.js Todos built with Tailwind CSS and TypeScript";
 
 const Layout = ({ children, title = defaultTitle, links = [] }: Props) => {
   const separator = (i: number) => i < links.length - 1;
