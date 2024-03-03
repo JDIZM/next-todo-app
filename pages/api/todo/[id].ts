@@ -25,6 +25,6 @@ export default async function handler(
 
   res.status(200).json({
     data: todo,
-    success: true
+    success: todo ? true : false
   });
 }

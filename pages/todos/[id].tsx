@@ -6,16 +6,16 @@ import { useTodosApi } from "@/hooks/use-todos-api";
 
 const TodoItemPage: NextPage = () => {
   const router = useRouter();
-  const { id } = router.query;
-  const { data, isLoading, error } = useTodosApi(Number(id));
+  const { id } = router.query as { id: string };
+  const { data, isLoading, error } = useTodosApi(id);
 
   const [todo] = data;
 
   return (
     <Layout links={navLinks}>
       {isLoading && <div>loading...</div>}
-      {error && <div>error</div>}
-      {todo && (
+      {error && <div>{error}</div>}
+      {todo && !error && (
         <div>
           <h1>Todo Item Page</h1>
           <p>Todo: {router.query.id}</p>
